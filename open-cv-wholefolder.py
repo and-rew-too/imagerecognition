@@ -121,7 +121,7 @@ for i in range(0, len(imlist)):
     #cv.imshow('CROP', cropped)
     cv.waitKey(0)
 
-    ##below is lines needed to add the images to a pdf, do pdf.add_page, pdf.image, pdf.output
+    ###below is lines needed to add the images to a pdf, do pdf.add_page, pdf.image, pdf.output
     pathname = r'C:\Users\Andrew Hu\Dropbox\PC\Downloads\poop' + \
         str(i+2) + '.jpg'  # dummy file name that gets deleted after
     cv.imwrite(pathname, cropped)

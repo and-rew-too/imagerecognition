@@ -13,6 +13,10 @@ import matplotlib.pyplot as plt
 # threshold
 # comment or uncomment os,remove pathname to save all these files 
 
+#take initial contours at like alpha = 0.4 (that'll give you broken rectangles, but in the right place)
+# take second contours with alpha = 1.9 extremely blurred out but a circle that encapsulates both of them
+# final bit, some function that'll take the intersection / union of both
+
 
 imlist = []
 pdf = FPDF()
@@ -25,8 +29,8 @@ Y = np.linspace(1,900,900)
 
 for file in glob.glob(r"C:\Users\Andrew Hu\Dropbox\PC\Desktop\*.jpg"):
 #for file in glob.glob(r"C:\Users\Andrew Hu\Dropbox\PC\Desktop\val-pre-delivery\*.jpg"):
-    n = cv.imread(file)
-    imlist.append(n)
+    IM = cv.imread(file)
+    imlist.append(IM)
     filelist.append(file)
 
 
@@ -125,7 +129,7 @@ for i in range(0, len(imlist)):
     pathname = r'C:\Users\Andrew Hu\Dropbox\PC\Downloads\poop' + \
         str(i+2) + '.jpg'  # dummy file name that gets deleted after
     cv.imwrite(pathname, cropped)
-    pdf.set_font('Arial', 'B', 8)
+    pdf.set_font('Arial', 'B', 12)
     if (i % 2) == 0:
         pdf.add_page()
         pdfy = 20
@@ -137,9 +141,4 @@ for i in range(0, len(imlist)):
     os.remove(pathname)  # delete file name once finished
     pdf.multi_cell(0, h/2, 'VAL: ' + filelist[i][55:])
 
-    ## below is to add single photo per page (above is two photos per page)
-    #pdf.add_page()
-    #pdf.image(pathname, x=0, y=20, w=w/2, h=h/2)
-    #pdf.set_font('Arial', 'B', 8)
-    #pdf.multi_cell(0, (h)+50, 'test' + filelist[i][38:])
 pdf.output("yourfile1.pdf", "F")
